@@ -1,0 +1,33 @@
+import React from "react";
+
+const WithCounter = (wrappedcomponent, incrementNumber) => {
+  class WithCounter extends React.Component {
+    constructor(props) {
+      super(props);
+
+      this.state = {
+        count: 0,
+      };
+    }
+
+    incrementCount = () => {
+      this.setState((prevstate) => {
+        return { count: prevstate.count + incrementNumber };
+      });
+    };
+
+    render() {
+      console.log(this.props.name);
+      return (
+        <wrappedcomponent
+          count={this.state.count}
+          incrementCount={this.incrementCount}
+          {...this.props}
+        />
+      );
+    }
+  }
+  return WithCounter;
+};
+
+export default WithCounter;
